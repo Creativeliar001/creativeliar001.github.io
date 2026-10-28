@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Richard Abiona</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Richard Abiona — Technology Management, Six Sigma, CNC & metrology training, and AI-powered web apps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;112,800;125,800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dark machine-shop hero with a live control chart, then a light, cool page of
+   left-aligned sections on a 12-col grid; mono "spec" labels carry tolerances and data. */
+:root {
+  --bg: #f2f4f7;          /* cool shop-floor white */
+  --surface: #ffffff;
+  --ink: #141a24;
+  --muted: #566173;
+  --line: #d8dde6;
+  --accent: #2448d8;      /* layout-fluid blue */
+  --brass: #a8771c;       /* brass gauge-block warmth */
+  --hero-bg: #0d121b;
+  --hero-ink: #eef2f8;
+  --hero-muted: #9aa6ba;
+  --hero-line: #26324a;
+  --hero-accent: #6f8cff;
+  --hero-warn: #e0a83c;
+  --chip: #e6eaf4;
+
+  --f-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --step-3: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
+  --step-4: clamp(2.6rem, 1.6rem + 4.6vw, 5rem);
+  --wrap: 1160px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10151e; --surface: #171e2a; --ink: #e8ecf3; --muted: #9aa6ba; --line: #283246;
+    --accent: #7d97ff; --brass: #d9a64a; --chip: #1f2838;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10151e; --surface: #171e2a; --ink: #e8ecf3; --muted: #9aa6ba; --line: #283246;
+  --accent: #7d97ff; --brass: #d9a64a; --chip: #1f2838;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: var(--step-0); line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 10; background: var(--hero-bg);
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--hero-accent); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { font-family: var(--f-display); font-stretch: 112%; line-height: 1.05; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+
+.wrap {
+  max-width: var(--wrap); margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (min-width: 720px) {
+  .wrap { padding-left: max(40px, env(safe-area-inset-left, 0px)); padding-right: max(40px, env(safe-area-inset-right, 0px)); }
+}
+.spec {
+  font-family: var(--f-mono); font-size: var(--step--1); letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--hero-bg) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--hero-line);
+}
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.brand { color: var(--hero-ink); text-decoration: none; font-family: var(--f-display); font-weight: 800; font-stretch: 112%; font-size: 1rem; letter-spacing: 0.01em; }
+.brand span { color: var(--hero-muted); font-family: var(--f-body); font-weight: 400; font-stretch: 100%; }
+.nav-links { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
+.nav-links a { color: var(--hero-muted); text-decoration: none; font-size: 0.9375rem; }
+.nav-links a:hover { color: var(--hero-ink); }
+.menu-btn { display: none; background: none; border: 1px solid var(--hero-line); color: var(--hero-ink); font: 500 var(--step--1) var(--f-mono); padding: 6px 10px; cursor: pointer; letter-spacing: 0.06em; }
+@media (max-width: 760px) {
+  .brand span { display: none; }
+  .menu-btn { display: block; }
+  .nav-links { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; gap: 0;
+    background: var(--hero-bg); border-bottom: 1px solid var(--hero-line);
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 8px; }
+  .nav-links.open { display: flex; }
+  .nav-links a { display: block; padding-block: 12px; font-size: 1rem; }
+}
+
+/* ---------- Hero ---------- */
+.hero { background: var(--hero-bg); color: var(--hero-ink); position: relative; overflow: hidden; }
+.hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero .wrap { position: relative; padding-block: clamp(120px, 18vw, 200px) clamp(48px, 7vw, 80px); }
+.hero .spec { color: var(--hero-accent); }
+.hero h1 { font-size: var(--step-4); font-weight: 800; font-stretch: 125%; margin-top: 14px; letter-spacing: -0.01em; }
+.hero h1 .hi { display: block; font-size: 0.42em; font-weight: 600; font-stretch: 112%; color: var(--hero-muted); margin-bottom: 0.2em; }
+.hero .lede { max-width: 40rem; margin-top: 22px; font-size: var(--step-1); line-height: 1.5; color: #c9d2e1; }
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; padding: 0; list-style: none; }
+.hero-tags li { font-family: var(--f-mono); font-size: var(--step--1); color: var(--hero-ink); border: 1px solid var(--hero-line); background: rgba(13,18,27,0.6); padding: 5px 10px; }
+
+/* ---------- Sections ---------- */
+section { padding-block: clamp(64px, 9vw, 112px); }
+section + section { border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 12px; margin-bottom: clamp(32px, 5vw, 56px); max-width: 46rem; }
+.sec-head h2 { font-size: var(--step-3); font-weight: 800; }
+.sec-head p { color: var(--muted); }
+
+/* About */
+.about-grid { display: grid; gap: clamp(32px, 5vw, 72px); grid-template-columns: 1fr; }
+@media (min-width: 900px) { .about-grid { grid-template-columns: 5fr 7fr; } }
+.about-grid h2 { font-size: var(--step-3); font-weight: 800; }
+.portrait { margin: 32px 0 0; max-width: 420px; display: grid; gap: 10px; }
+.portrait img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; background: var(--chip); border-bottom: 3px solid var(--accent); }
+.copy-btn { margin-left: 12px; background: none; border: 1px solid var(--hero-line); color: var(--hero-muted); font: 500 0.75rem var(--f-mono); letter-spacing: 0.06em; padding: 3px 8px; cursor: pointer; vertical-align: 1px; }
+.copy-btn:hover { color: var(--hero-ink); }
+.about-copy { display: grid; gap: 18px; max-width: 40rem; min-width: 0; }
+.about-copy p:first-child { font-size: var(--step-1); line-height: 1.5; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; justify-self: start; margin-top: 8px;
+  background: var(--accent); color: #fff; text-decoration: none; font-weight: 600;
+  padding: 12px 20px; border-radius: 2px; font-size: 0.9375rem;
+}
+:root[data-theme="dark"] .btn { color: #0d121b; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn { color: #0d121b; } }
+.btn:hover { filter: brightness(1.08); }
+
+.readout {
+  margin-top: 28px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.readout div { padding: 18px 14px 16px 0; }
+.readout div + div { padding-left: 14px; border-left: 1px solid var(--line); }
+.readout b { display: block; font-family: var(--f-display); font-stretch: 112%; font-weight: 800; font-size: var(--step-2); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.readout span { display: block; margin-top: 6px; font-size: var(--step--1); color: var(--muted); line-height: 1.4; }
+
+/* What I do */
+.do-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr)); gap: 0; border-top: 1px solid var(--line); }
+.do-item { padding: 28px 28px 32px 0; border-bottom: 1px solid var(--line); display: grid; gap: 10px; align-content: start; min-width: 0; }
+@media (min-width: 700px) {
+  .do-grid { column-gap: 40px; }
+}
+.do-item .spec { color: var(--brass); }
+.do-item h3 { font-size: var(--step-1); font-weight: 800; }
+.do-item p { color: var(--muted); font-size: 1rem; }
+
+/* Builds */
+.builds { background: var(--surface); }
+.build { display: grid; gap: 24px 48px; grid-template-columns: 1fr; padding-block: 36px; border-top: 1px solid var(--line); }
+.build:last-child { border-bottom: 1px solid var(--line); }
+@media (min-width: 900px) { .build { grid-template-columns: 4fr 8fr; } }
+.build-meta { display: grid; gap: 12px; align-content: start; }
+.build-meta h3 { font-size: var(--step-2); font-weight: 800; }
+.status { display: inline-flex; align-items: center; gap: 8px; justify-self: start; font-family: var(--f-mono); font-size: var(--step--1); padding: 4px 10px; background: var(--chip); color: var(--ink); }
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #2e9e5b; }
+.status.wip::before { background: var(--brass); }
+.build-body { display: grid; gap: 18px; min-width: 0; }
+.build-body > p { font-size: var(--step-1); line-height: 1.5; max-width: 42rem; }
+.feat { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); column-gap: 32px; }
+.feat li { padding: 12px 0 12px 22px; border-top: 1px dashed var(--line); position: relative; font-size: 0.96875rem; color: var(--muted); }
+.feat li::before { content: "+"; position: absolute; left: 0; top: 11px; font-family: var(--f-mono); color: var(--accent); font-weight: 500; }
+.feat b { color: var(--ink); font-weight: 600; }
+
+/* Path / timeline */
+.path { list-style: none; margin: 0; padding: 0; display: grid; }
+.path li { display: grid; grid-template-columns: 1fr; gap: 6px 40px; padding-block: 22px; border-top: 1px solid var(--line); }
+.path li:last-child { border-bottom: 1px solid var(--line); }
+@media (min-width: 760px) { .path li { grid-template-columns: 170px 1fr 1.1fr; align-items: baseline; } }
+.path .when { font-family: var(--f-mono); font-size: 0.875rem; color: var(--accent); font-variant-numeric: tabular-nums; }
+.path h3 { font-size: 1.125rem; font-weight: 800; }
+.path .where { display: block; font-family: var(--f-body); font-weight: 400; font-stretch: 100%; color: var(--muted); font-size: 0.9375rem; margin-top: 4px; }
+.path p { color: var(--muted); font-size: 0.96875rem; min-width: 0; }
+
+/* Credentials */
+.cred-grid { display: grid; gap: 40px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.cred-grid h3 { font-size: var(--step-1); font-weight: 800; margin-bottom: 14px; }
+.cred { list-style: none; margin: 0; padding: 0; }
+.cred li { padding-block: 12px; border-top: 1px solid var(--line); display: grid; gap: 2px; }
+.cred li b { font-weight: 600; }
+.cred li span { color: var(--muted); font-size: 0.9375rem; }
+
+/* Service */
+.service { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.svc { background: var(--surface); border: 1px solid var(--line); padding: 24px; display: grid; gap: 8px; align-content: start; }
+.svc h3 { font-size: 1.125rem; font-weight: 800; }
+.svc p { color: var(--muted); font-size: 0.96875rem; }
+.svc.lead { border-color: var(--accent); }
+
+/* Contact */
+.contact { background: var(--hero-bg); color: var(--hero-ink); border-top: 0 !important; }
+.contact h2 { font-size: var(--step-4); font-weight: 800; font-stretch: 125%; max-width: 14ch; }
+.contact .spec { color: var(--hero-accent); }
+.contact p { color: var(--hero-muted); max-width: 38rem; margin-top: 20px; font-size: var(--step-1); line-height: 1.5; }
+.contact-rows { margin-top: 40px; display: grid; gap: 0; max-width: 46rem; }
+.contact-rows div { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding-block: 14px; border-top: 1px solid var(--hero-line); align-items: baseline; }
+.contact-rows div:last-child { border-bottom: 1px solid var(--hero-line); }
+.contact-rows dt { font-family: var(--f-mono); font-size: var(--step--1); letter-spacing: 0.06em; text-transform: uppercase; color: var(--hero-muted); }
+.contact-rows dd { margin: 0; color: var(--hero-ink); min-width: 0; overflow-wrap: anywhere; }
+.contact-rows a { color: var(--hero-ink); }
+.foot { margin-top: 64px; font-family: var(--f-mono); font-size: var(--step--1); color: var(--hero-muted); }
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top">Richard Abiona <span>· Technology Management</span></a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">MENU</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">What I Do</a></li>
+      <li><a href="#builds">Builds</a></li>
+      <li><a href="#path">Path</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="spc" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="spec">MS Technology Management · NC A&amp;T State University</p>
+    <h1><span class="hi">Hi, I'm</span>Richard Abiona</h1>
+    <p class="lede">I work where quality engineering, manufacturing training, and software meet. I bring a decade of communication and product experience to the shop floor and the lab, and I build AI-powered tools that take the busywork off people's plates.</p>
+    <ul class="hero-tags">
+      <li>Six Sigma</li>
+      <li>Regression &amp; forecasting</li>
+      <li>CNC machining</li>
+      <li>Metrology</li>
+      <li>AI web apps</li>
+      <li>Product management</li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section id="about">
+    <div class="wrap about-grid">
+      <div>
+        <p class="spec">About</p>
+        <h2 style="margin-top:12px">A builder who learned to explain things first.</h2>
+        <figure class="portrait">
+          <img src="richard-abiona.jpg" width="900" height="1125" alt="Portrait of Richard Abiona in a black three-piece suit, seated against a grey backdrop">
+          <figcaption class="spec">Greensboro, NC</figcaption>
+        </figure>
+      </div>
+      <div class="about-copy">
+        <p>I'm a graduate student in Technology Management at North Carolina A&amp;T State University, focused on Six Sigma and quality systems. My day-to-day tools are process data, regression and forecasting models, and the people who run the machines.</p>
+        <p>I came to engineering through communication. I spent six years in Abuja leading communication and stakeholder engagement for a nonprofit that built digital platforms against gender-based violence, police brutality, and poverty. A stint as a product manager at a fintech company showed me how much I liked building the product itself.</p>
+        <p>Since then I've earned the ACE CNC certificate and gone on to train others in CNC machining and metrology. I also build AI-powered web apps: a job search assistant, a volunteer coordination platform, and a lab operations system for my own department.</p>
+        <a class="btn" href="#contact">Get in touch →</a>
+        <div class="readout" aria-label="Highlights">
+          <div><b>150+</b><span>students recruited as a BVCC campus ambassador</span></div>
+          <div><b>2</b><span>ACE CNC bootcamps trained, Summer 2026</span></div>
+          <div><b>3</b><span>AI-powered platforms built</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="spec">What I do</p>
+        <h2>Process, machines, and the software around them.</h2>
+      </div>
+      <div class="do-grid">
+        <article class="do-item">
+          <p class="spec">σ · DPMO · Cp/Cpk</p>
+          <h3>Quality &amp; Six Sigma</h3>
+          <p>Graduate coursework across quality management and Six Sigma. I use regression, forecasting, and control charts to find where a process drifts and what to change.</p>
+        </article>
+        <article class="do-item">
+          <p class="spec">G-code · ±0.001 in</p>
+          <h3>CNC &amp; Metrology Training</h3>
+          <p>ACE CNC certified (online and in-person bootcamp), then hired to train two ACE CNC bootcamps. I lead metrology lectures and hands-on training for college and high school students with Dr. David Chamblee at NC A&amp;T.</p>
+        </article>
+        <article class="do-item">
+          <p class="spec">LLMs · Automation</p>
+          <h3>AI-Powered Web Apps</h3>
+          <p>I design and build full web platforms that use AI to triage, rank, and draft, with people approving the decisions that matter.</p>
+        </article>
+        <article class="do-item">
+          <p class="spec">Discovery → Delivery</p>
+          <h3>Product Management</h3>
+          <p>Product manager at a fintech company and volunteer PM with Aeonian Technology. Certified in Design Thinking and Product Management through the Black Venture Capital Consortium.</p>
+        </article>
+        <article class="do-item">
+          <p class="spec">Lectures · Media · Outreach</p>
+          <h3>Technical Communication</h3>
+          <p>MS in Communication from NC State, where I taught COM 110 Public Speaking for three semesters. I turn complex work into talks, campaigns, and films people act on.</p>
+        </article>
+        <article class="do-item">
+          <p class="spec">GIS · Mapping</p>
+          <h3>Geospatial Analysis</h3>
+          <p>Graduate Certificate in GIS from NC State, one semester short of the MS. I used mapping to build Holocaust education resources as a Schnog Fellow.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="builds" class="builds">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="spec">Builds</p>
+        <h2>Software I've designed and built.</h2>
+        <p>Each one started with a real operational problem: a job search, a volunteer roster, a machine shop.</p>
+      </div>
+
+      <article class="build">
+        <div class="build-meta">
+          <span class="status wip">In development</span>
+          <h3>AET Lab Operations Platform</h3>
+          <p class="spec">For NC A&amp;T Applied Engineering Technology</p>
+        </div>
+        <div class="build-body">
+          <p>A web platform for running the department's CNC, automotive, and fabrication labs. Students scan a machine's QR code to book time, check out tools, and report problems. Anyone without current safety training is blocked.</p>
+          <ul class="feat">
+            <li><b>QR booking and checkout</b> for every machine and tool</li>
+            <li><b>Problem reports</b> with photo or video from the floor</li>
+            <li><b>Safety-training gate</b> enforced at booking</li>
+            <li><b>AI-triaged repair tickets</b> for the lab manager</li>
+            <li><b>Preventive maintenance</b> schedules and digital 5S audits</li>
+            <li><b>Chair dashboard</b> with machine uptime, open issues, and 5S scores</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="build">
+        <div class="build-meta">
+          <span class="status">Built</span>
+          <h3>AI Job Search Assistant</h3>
+          <p class="spec">Matching · Drafting · Tracking</p>
+        </div>
+        <div class="build-body">
+          <p>Finds well-matched roles every day and sends them at the time you choose, ranked by fit with a short summary of each. For the jobs you pick, it drafts a tailored, ATS-ready CV, cover letter, and application answers using only facts you've confirmed.</p>
+          <ul class="feat">
+            <li><b>Daily ranked matches</b> delivered on your schedule</li>
+            <li><b>Tailored documents</b> built only from confirmed facts</li>
+            <li><b>Submits on approval</b>, or hands you everything to apply yourself</li>
+            <li><b>Saved job descriptions</b> for every application</li>
+            <li><b>Follow-ups and interview prep</b></li>
+            <li><b>Weekly insights</b> on what's earning callbacks</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="build">
+        <div class="build-meta">
+          <span class="status">Built</span>
+          <h3>Volunteer Coordination Platform</h3>
+          <p class="spec">For nonprofits, NGOs &amp; churches</p>
+        </div>
+        <div class="build-body">
+          <p>Gets the right people to show up and takes the paperwork off coordinators' plates. Volunteers sign up, confirm, swap, and check in by text, with no account or app.</p>
+          <ul class="feat">
+            <li><b>Text-based sign-up</b>, confirmation, and shift swaps</li>
+            <li><b>Automatic reminders</b> and waitlist backfill</li>
+            <li><b>QR check-in</b> that logs volunteer hours</li>
+            <li><b>Live event view</b> for coordinators</li>
+            <li><b>One-click verification letters</b> for volunteer hours</li>
+            <li><b>Funder-ready reports</b> on impact and in-kind match</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="path">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="spec">Path</p>
+        <h2>From the newsroom to the machine shop.</h2>
+        <p>Most recent first.</p>
+      </div>
+      <ol class="path">
+        <li>
+          <span class="when">Summer 2026</span>
+          <h3>ACE CNC Bootcamp Trainer<span class="where">ACE CNC · NC A&amp;T</span></h3>
+          <p>Trained participants across two CNC machining bootcamps after completing the certificate program myself. Led metrology lectures and training for college and high school students with Dr. David Chamblee.</p>
+        </li>
+        <li>
+          <span class="when">Jan – Apr 2026</span>
+          <h3>BVCC Campus Ambassador<span class="where">Black Venture Capital Consortium · NC A&amp;T</span></h3>
+          <p>Recruited 150+ students into BVCC's free curriculum track. Gave on-campus talks, ran tabling events, and led media and recruitment.</p>
+        </li>
+        <li>
+          <span class="when">Aug 2025 – now</span>
+          <h3>MS Technology Management<span class="where">North Carolina A&amp;T State University</span></h3>
+          <p>Six Sigma and quality focus, with data analysis including regression and forecasting.</p>
+        </li>
+        <li>
+          <span class="when">Apr 2025 – Jan 2026</span>
+          <h3>Communication &amp; Marketing Fellow<span class="where">Cyber Alliance</span></h3>
+          <p>Nine-month fellowship in communication and marketing.</p>
+        </li>
+        <li>
+          <span class="when">2023 – 2025</span>
+          <h3>MS Communication &amp; Graduate Certificate in GIS<span class="where">NC State University · Full scholarship</span></h3>
+          <p>Taught COM 110 Public Speaking for three semesters as a teaching assistant while taking about four graduate courses a semester across two programs. Schnog Fellow and ISAC member.</p>
+        </li>
+        <li>
+          <span class="when">Before 2023</span>
+          <h3>Product Manager<span class="where">Fintech company, Nigeria</span></h3>
+          <p>Moved from communication into product, working on a financial technology platform.</p>
+        </li>
+        <li>
+          <span class="when">2015 – 2022</span>
+          <h3>Communication &amp; Stakeholder Engagement Lead<span class="where">Nonprofit, Abuja</span></h3>
+          <p>Six to seven years across digital marketing, scriptwriting, and communication leadership, ending as lead at a nonprofit building digital platforms on gender-based violence, police brutality, and poverty.</p>
+        </li>
+        <li>
+          <span class="when">2015</span>
+          <h3>BSc Mass Communication<span class="where">Nigeria</span></h3>
+          <p>Where it started.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="credentials">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="spec">Education &amp; credentials</p>
+        <h2>Degrees and certifications.</h2>
+      </div>
+      <div class="cred-grid">
+        <div>
+          <h3>Degrees</h3>
+          <ul class="cred">
+            <li><b>MS Technology Management</b><span>NC A&amp;T State University · in progress</span></li>
+            <li><b>MS Communication</b><span>NC State University · 2025</span></li>
+            <li><b>Graduate Certificate, GIS</b><span>NC State University · one semester from the MS</span></li>
+            <li><b>BSc Mass Communication</b><span>Nigeria · 2015</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Certifications</h3>
+          <ul class="cred">
+            <li><b>ACE CNC Certificate</b><span>Online program and in-person bootcamp</span></li>
+            <li><b>Product Management</b><span>Black Venture Capital Consortium · 2025</span></li>
+            <li><b>Design Thinking</b><span>Black Venture Capital Consortium · 2025</span></li>
+            <li><b>Six Sigma &amp; quality coursework</b><span>NC A&amp;T State University</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Honors</h3>
+          <ul class="cred">
+            <li><b>Schnog Fellowship</b><span>Alfred and Anita Schnog Foundation</span></li>
+            <li><b>Full graduate scholarship</b><span>NC State University</span></li>
+            <li><b>Teaching assistantship offer, GIS</b><span>NC State University · 2025</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="service">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="spec">Giving back</p>
+        <h2>Service and community.</h2>
+      </div>
+      <div class="service">
+        <article class="svc lead">
+          <p class="spec">Documentary · 2025 – 2026</p>
+          <h3>NCCADV Documentary</h3>
+          <p>Shot, produced, directed, and edited a volunteer documentary for the North Carolina Coalition Against Domestic Violence on its affiliate agencies and the effect of funding cuts on their work. Member since 2023.</p>
+        </article>
+        <article class="svc">
+          <p class="spec">Research · Schnog Fellow</p>
+          <h3>Holocaust Education Resources</h3>
+          <p>With Prof. Roy Schwartzman at NC State, built a website, map, videos, and teaching materials for students and Holocaust educators.</p>
+        </article>
+        <article class="svc">
+          <p class="spec">Board member</p>
+          <h3>Empowered Africa</h3>
+          <p>Scholarships and support for promising high school students in Africa, starting with Nigeria.</p>
+        </article>
+        <article class="svc">
+          <p class="spec">Advisory council</p>
+          <h3>ISAC, NC State</h3>
+          <p>Gave feedback and recommendations to the Office of International Services on programs and policies for international students.</p>
+        </article>
+        <article class="svc">
+          <p class="spec">Volunteer</p>
+          <h3>ISSERV, NC State</h3>
+          <p>Volunteered with the Food Bank of Central &amp; Eastern North Carolina, Raleigh BugFest, and other food banks.</p>
+        </article>
+        <article class="svc">
+          <p class="spec">Co-founder</p>
+          <h3>Communication &amp; Media Organization</h3>
+          <p>Co-founded a communication and media organization in Nigeria.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="spec">Contact</p>
+      <h2 style="margin-top:14px">Let's build something that runs better.</h2>
+      <p>I'm open to roles and projects in quality engineering, operations, technical training, and product. Reach out about work, collaboration, or a lab that needs better tools.</p>
+      <dl class="contact-rows">
+        <div><dt>Email</dt><dd><a href="mailto:richardabiona007@gmail.com" id="email">richardabiona007@gmail.com</a><button class="copy-btn" id="copy-email" type="button">COPY</button></dd></div>
+        <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/richard-abiona-0084b285/" target="_blank" rel="noopener">linkedin.com/in/richard-abiona</a></dd></div>
+        <div><dt>Based in</dt><dd>Greensboro, North Carolina</dd></div>
+      </dl>
+      <p class="foot">© 2026 Richard Abiona</p>
+    </div>
+  </section>
+</main>
+
+<script>
+// Mobile menu
+(function () {
+  var btn = document.getElementById('menu-btn'), links = document.getElementById('nav-links');
+  btn.addEventListener('click', function () {
+    var open = links.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { links.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+  });
+})();
+
+// Copy email
+(function () {
+  var btn = document.getElementById('copy-email'), link = document.getElementById('email');
+  btn.addEventListener('click', function () {
+    var done = function () { btn.textContent = 'COPIED'; setTimeout(function () { btn.textContent = 'COPY'; }, 1600); };
+    var select = function () { var r = document.createRange(); r.selectNodeContents(link); var s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    try { navigator.clipboard.writeText(link.textContent).then(done, select); } catch (e) { select(); }
+  });
+})();
+
+// Hero: an X-bar control chart that keeps sampling. Points beyond the limits are flagged.
+(function () {
+  var c = document.getElementById('spc'); if (!c) return;
+  var ctx = c.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var css = getComputedStyle(document.documentElement);
+  var col = {
+    line: css.getPropertyValue('--hero-line').trim() || '#26324a',
+    accent: css.getPropertyValue('--hero-accent').trim() || '#6f8cff',
+    warn: css.getPropertyValue('--hero-warn').trim() || '#e0a83c',
+    muted: css.getPropertyValue('--hero-muted').trim() || '#9aa6ba'
+  };
+  var N = 48, pts = [], seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  function gauss() { return (rnd() + rnd() + rnd() + rnd() - 2) * 1.2; }
+  function sample(i) { var v = gauss(); if (i % 17 === 11) v = 3.3 + rnd() * 0.4; return Math.max(-3.9, Math.min(3.9, v)); }
+  for (var i = 0; i < N; i++) pts.push(sample(i));
+  var k = N, offset = 0, W, H, dpr;
+
+  function size() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = c.clientWidth; H = c.clientHeight;
+    c.width = W * dpr; c.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var narrow = W < 760;
+    var top = narrow ? 20 : H * 0.12, bot = narrow ? 104 : H * 0.62, mid = (top + bot) / 2, sig = (bot - top) / 8;
+    var left = narrow ? 16 : W * 0.38, right = W - (narrow ? 16 : 24), step = (right - left) / (N - 2);
+    var y = function (v) { return mid - v * sig; };
+    ctx.font = '11px "IBM Plex Mono", Consolas, monospace';
+    // sigma grid
+    ctx.lineWidth = 1;
+    for (var s = -3; s <= 3; s++) {
+      ctx.strokeStyle = col.line; ctx.globalAlpha = s === 0 ? 0.9 : 0.5;
+      ctx.setLineDash(Math.abs(s) === 3 ? [6, 5] : s === 0 ? [] : [2, 6]);
+      ctx.beginPath(); ctx.moveTo(left, y(s)); ctx.lineTo(right, y(s)); ctx.stroke();
+    }
+    ctx.setLineDash([]); ctx.globalAlpha = 0.85; ctx.fillStyle = col.muted; ctx.textAlign = 'right';
+    if (!narrow) {
+      ctx.fillText('UCL +3σ', left - 10, y(3) + 4);
+      ctx.fillText('CL  x̄', left - 10, y(0) + 4);
+      ctx.fillText('LCL −3σ', left - 10, y(-3) + 4);
+    }
+    // series
+    ctx.save(); ctx.beginPath(); ctx.rect(left, 0, right - left, H); ctx.clip();
+    ctx.globalAlpha = 0.9; ctx.strokeStyle = col.accent; ctx.lineWidth = 1.5; ctx.beginPath();
+    for (var i = 0; i < N; i++) { var x = left + (i - offset) * step; i ? ctx.lineTo(x, y(pts[i])) : ctx.moveTo(x, y(pts[i])); }
+    ctx.stroke();
+    for (var j = 0; j < N; j++) {
+      var px = left + (j - offset) * step, out = Math.abs(pts[j]) > 3;
+      ctx.globalAlpha = 1; ctx.fillStyle = out ? col.warn : col.accent;
+      ctx.beginPath(); ctx.arc(px, y(pts[j]), out ? 4 : 2.4, 0, Math.PI * 2); ctx.fill();
+      if (out) { ctx.strokeStyle = col.warn; ctx.globalAlpha = 0.5; ctx.beginPath(); ctx.arc(px, y(pts[j]), 9, 0, Math.PI * 2); ctx.stroke(); }
+    }
+    ctx.restore();
+    ctx.globalAlpha = 1;
+  }
+  var last = 0;
+  function tick(t) {
+    if (!last) last = t;
+    offset += (t - last) / 900; last = t;
+    if (offset >= 1) { offset -= 1; pts.shift(); pts.push(sample(k++)); }
+    draw(); requestAnimationFrame(tick);
+  }
+  size(); draw();
+  window.addEventListener('resize', function () { size(); draw(); });
+  if (!reduce) requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
