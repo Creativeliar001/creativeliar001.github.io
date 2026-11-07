@@ -699,7 +699,7 @@ section + section { border-top: 1px solid var(--line); }
           </ul>
         </div>
       </div>
-      <p class="also" data-reveal><b>Lights Still On:</b> I shot, produced, directed, and edited this volunteer documentary for the North Carolina Coalition Against Domestic Violence. <a href="https://youtu.be/rvpmNzFEMUY" target="_blank" rel="noopener">Watch on YouTube →</a></p>
+      <p class="also" data-reveal><b>Lights Still On:</b> I shot, produced, directed, and edited this volunteer documentary for the North Carolina Coalition Against Domestic Violence. <a href="https://youtu.be/rvpmNzFEMUY" target="_blank" rel="noopener" data-track="Lights Still On video">Watch on YouTube →</a></p>
     </div>
   </section>
 
@@ -711,8 +711,8 @@ section + section { border-top: 1px solid var(--line); }
       <h2 style="margin-top:14px">Let's make the work run better.</h2>
       <p>Reach out about a role, a product that needs a clear roadmap, or a process that needs measurable improvement.</p>
       <dl class="contact-rows">
-        <div><dt>Email</dt><dd><a href="mailto:richardabiona007@gmail.com" id="email">richardabiona007@gmail.com</a><button class="copy-btn" id="copy-email" type="button">COPY</button></dd></div>
-        <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/richard-abiona-0084b285/" target="_blank" rel="noopener">linkedin.com/in/richard-abiona</a></dd></div>
+        <div><dt>Email</dt><dd><a href="mailto:richardabiona007@gmail.com" id="email" data-track="Email link">richardabiona007@gmail.com</a><button class="copy-btn" id="copy-email" type="button" data-track="Copy email">COPY</button></dd></div>
+        <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/richard-abiona-0084b285/" target="_blank" rel="noopener" data-track="LinkedIn">linkedin.com/in/richard-abiona</a></dd></div>
         <div><dt>Based in</dt><dd>Raleigh, North Carolina</dd></div>
       </dl>
       <p class="foot">© 2026 Richard Abiona</p>
@@ -722,6 +722,33 @@ section + section { border-top: 1px solid var(--line); }
 
 <script>
 var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Analytics events: button clicks and sections viewed. No-ops where the tag isn't loaded.
+(function () {
+  function track(name, params) { if (typeof window.gtag === 'function') window.gtag('event', name, params); }
+  function whereIs(el) {
+    if (el.closest('.nav')) return 'nav';
+    if (el.closest('.hero')) return 'hero';
+    var s = el.closest('section');
+    return s ? s.id : 'page';
+  }
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest ? e.target.closest('a, button') : null;
+    if (!el) return;
+    var label = el.getAttribute('data-track') || el.textContent.replace('→', '').replace(/\s+/g, ' ').trim();
+    track('button_click', { button_name: label, button_location: whereIs(el) });
+  });
+  if (!('IntersectionObserver' in window)) return;
+  // Counts a section once per visit when it reaches the middle of the screen.
+  var seen = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      track('section_view', { section_name: en.target.id });
+      seen.unobserve(en.target);
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  document.querySelectorAll('section[id]').forEach(function (s) { seen.observe(s); });
+})();
 
 // Mobile menu
 (function () {
