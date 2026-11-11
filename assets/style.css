@@ -276,6 +276,7 @@ section + section { border-top: 1px solid var(--line); }
 
 /* Builds: tilt cards */
 .builds-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); perspective: 1200px; }
+.builds-grid.two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
 .build {
   position: relative; background: var(--surface); border: 1px solid var(--line); padding: 26px 24px 24px;
   display: grid; gap: 12px; align-content: start; min-width: 0;

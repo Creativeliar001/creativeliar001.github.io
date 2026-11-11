@@ -1,4 +1,9 @@
 // Richard Abiona — shared behavior for every page.
+
+// Show clean addresses: /product.html becomes /product, /index.html becomes /.
+if (/\.html$/.test(location.pathname) && window.history && history.replaceState) {
+  history.replaceState(null, '', location.pathname.replace(/(index)?\.html$/, '') + location.search + location.hash);
+}
 var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var pageName = document.body.getAttribute('data-page') || 'home';
 
