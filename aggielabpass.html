@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-13LXE11B9W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-13LXE11B9W');
+</script>
+<title>AggieLabPass Case Study | Richard Abiona</title>
+<meta name="description" content="How Richard Abiona turned a lab director interview into AggieLabPass, a production lab-operations app for NC A&T's Applied Engineering Technology labs.">
+<meta name="author" content="Richard Abiona">
+<link rel="canonical" href="https://richardabiona.com/aggielabpass">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#f9f8f7">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AggieLabPass Case Study | Richard Abiona">
+<meta property="og:description" content="From a lab director interview to a production app: QR tool checkout, live stock, broken-tool tracking, and training-gated machine booking.">
+<meta property="og:url" content="https://richardabiona.com/aggielabpass">
+<meta property="og:image" content="https://richardabiona.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="aggielabpass">
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="/">Richard Abiona</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">MENU</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="product" aria-current="page">Product</a></li>
+      <li><a href="quality">Quality</a></li>
+      <li><a href="impact">Impact</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero cs-hero" id="top">
+  <div class="wrap">
+    <div class="copy">
+      <a class="crumb" href="product#builds">Product case studies</a>
+      <h1>AggieLabPass</h1>
+      <p class="lede">A production lab-operations app for NC A&amp;T's Applied Engineering Technology labs. It started with one interview with the lab director, and I took it from discovery to a deployed product.</p>
+      <dl class="cs-meta">
+        <div><dt>Role</dt><dd>Founder &amp; Product Lead: discovery, design, build, launch</dd></div>
+        <div><dt>Timeline</dt><dd>Oct 2026 – Present</dd></div>
+        <div><dt>Status</dt><dd>Live in production</dd></div>
+        <div><dt>Built with</dt><dd>Next.js, TypeScript, Supabase (PostgreSQL), Vercel</dd></div>
+      </dl>
+      <div class="hero-cta">
+        <a class="btn" href="https://aggielabpass.com/" target="_blank" rel="noopener" data-track="AggieLabPass site">Visit aggielabpass.com</a>
+      </div>
+    </div>
+    <div class="cs-glance">
+      <p class="spec">At a glance</p>
+      <div><b>4</b><span>operational problems defined in discovery</span></div>
+      <div><b>4</b><span>user roles, each with its own access</span></div>
+      <div><b>QR</b><span>checkout, check-in, and printable label sheets</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="cs-section">
+        <header><span class="spec">01</span><h2>Discovery</h2></header>
+        <div class="prose">
+          <p class="lead">Before designing anything, I interviewed the director of the Applied Engineering Technology labs to understand how the labs actually run day to day.</p>
+          <p>The labs serve classes, research, and student groups, with shared tools, consumables, and CNC, automotive, and fabrication equipment. The interview surfaced four recurring problems. None of them was a technology problem on its own. Each one came from the lab having no shared, up-to-date record of what was happening.</p>
+          <div class="fit-table">
+            <div class="head"><span>What the lab director described</span><span>What it cost the lab</span></div>
+            <div><b>Untracked tools</b><span>Tools left the tool room with no record of who had them.</span></div>
+            <div><b>Surprise stockouts</b><span>Consumables ran out before anyone knew to reorder.</span></div>
+            <div><b>Unreported breakages</b><span>Broken tools went unreported until the shelf was empty.</span></div>
+            <div><b>Noise clashing with classes</b><span>Loud machine work collided with teaching in the same space.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <header><span class="spec">02</span><h2>From problems to features</h2></header>
+        <div class="prose">
+          <p>Every feature traces back to one of the four problems. I used a Lean lens throughout: make the right action the easy one, and make problems visible as soon as they happen.</p>
+          <div class="fit-table">
+            <div class="head"><span>Problem</span><span>What I built</span></div>
+            <div><b>Untracked tools</b><span>QR-code tool checkout, with overdue reminders that escalate to the Lab Manager.</span></div>
+            <div><b>Surprise stockouts</b><span>Live stock counts and an automatic reorder list.</span></div>
+            <div><b>Unreported breakages</b><span>Broken-tool tracking, so damage is logged when it happens instead of discovered later.</span></div>
+            <div><b>Noise clashing with classes</b><span>Machine booking with noise-conflict warnings.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <header><span class="spec">03</span><h2>Designing for the people who use it</h2></header>
+        <div class="prose">
+          <p>A lab tool only works if students can use it in the middle of lab work, in seconds. That shaped the design:</p>
+          <ul>
+            <li><b>QR codes everywhere.</b> Students scan to check out a tool or check in to a session. Auto-generated QR label sheets make it easy for staff to tag new tools and shelves.</li>
+            <li><b>Training-gated booking.</b> Students can only book machines they have been cleared to use. Safety is enforced by the system instead of by memory, a mistake-proofing approach from Lean.</li>
+            <li><b>Session sign-up with QR check-in,</b> so lab sessions have an accurate attendance record.</li>
+            <li><b>Role-based access for 4 user roles,</b> so each person sees what they need and nothing they shouldn't.</li>
+            <li><b>Sign-in with an NC A&amp;T email code.</b> No passwords to create or forget.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <header><span class="spec">04</span><h2>Built to improve the lab over time</h2></header>
+        <div class="prose">
+          <p class="lead">The app does more than replace a clipboard. It gives the lab data it never had.</p>
+          <p>Overdue checkouts, breakage records, stock levels, and booking conflicts are now captured as they happen. That gives the Lab Manager and faculty a factual basis for reordering, maintenance, and scheduling decisions, the same Plan-Do-Check-Act loop I apply as a Lean Six Sigma Green Belt.</p>
+          <blockquote class="pullquote">Discovery to production, as the only person on the product.</blockquote>
+          <p>I owned every stage: the interview, the problem definition, the feature set, the build, and the deployment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="more" class="tint">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="spec">More case studies</p>
+        <h2>Other products I built.</h2>
+      </div>
+      <div class="cross">
+        <a href="jobsmyth" data-track="Case study link: Jobsmyth">
+          <span class="spec">AI job search · Founder</span>
+          <h3>Jobsmyth</h3>
+          <p>3 AI agents and 10+ releases in 4 weeks, with truth safeguards built in.</p>
+          <span class="go">Read the case study</span>
+        </a>
+        <a href="outreach-desk" data-track="Case study link: Aeon Outreach Desk">
+          <span class="spec">Growth automation · Aeonian Technology</span>
+          <h3>Aeon Outreach Desk</h3>
+          <p>An AI agent that turned manual prospecting into a daily pipeline.</p>
+          <span class="go">Read the case study</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="spec">Contact</p>
+      <h2 style="margin-top:14px">Let's fix the real problem.</h2>
+      <p>Reach out about a product role, an operations challenge, or a team that needs better tools.</p>
+      <dl class="contact-rows">
+        <div><dt>Email</dt><dd><a href="mailto:richardabiona007@gmail.com" id="email" data-track="Email link">richardabiona007@gmail.com</a><button class="copy-btn" id="copy-email" type="button" data-track="Copy email">COPY</button></dd></div>
+        <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/richard-abiona-0084b285/" target="_blank" rel="noopener" data-track="LinkedIn">linkedin.com/in/richard-abiona</a></dd></div>
+        <div><dt>Based in</dt><dd>Raleigh, North Carolina</dd></div>
+      </dl>
+      <p class="foot"><span>© 2026 Richard Abiona</span><a href="/">Home</a><a href="product">Product</a><a href="quality">Quality</a><a href="impact">Impact</a></p>
+    </div>
+  </section>
+</main>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-13LXE11B9W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-13LXE11B9W');
+</script>
+<title>Jobsmyth Case Study | Richard Abiona</title>
+<meta name="description" content="How Richard Abiona founded and built Jobsmyth, an AI job search platform: 3 AI agents, 10+ releases in 4 weeks, truth safeguards, and an 8-user pilot at NC A&T.">
+<meta name="author" content="Richard Abiona">
+<link rel="canonical" href="https://richardabiona.com/jobsmyth">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#f9f8f7">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jobsmyth Case Study | Richard Abiona">
+<meta property="og:description" content="Founding and building an AI job search platform: 3 AI agents, 10+ releases in 4 weeks, and truth safeguards.">
+<meta property="og:url" content="https://richardabiona.com/jobsmyth">
+<meta property="og:image" content="https://richardabiona.com/media/product/jobsmyth-home.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="jobsmyth">
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="/">Richard Abiona</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">MENU</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="product" aria-current="page">Product</a></li>
+      <li><a href="quality">Quality</a></li>
+      <li><a href="impact">Impact</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero cs-hero" id="top">
+  <div class="wrap">
+    <div class="copy">
+      <a class="crumb" href="product#builds">Product case studies</a>
+      <h1>Jobsmyth</h1>
+      <p class="lede">An AI job search platform that finds roles a person can legally take, confirms each one is still open, and prepares application documents from their real experience only. I founded it and own it end to end.</p>
+      <dl class="cs-meta">
+        <div><dt>Role</dt><dd>Founder &amp; Product Lead, sole product owner</dd></div>
+        <div><dt>Timeline</dt><dd>Oct 2026 – Present</dd></div>
+        <div><dt>Status</dt><dd>Live, private pilot with 8 NC A&amp;T job seekers</dd></div>
+        <div><dt>Focus</dt><dd>AI agents, LLM guardrails, rapid releases</dd></div>
+      </dl>
+      <div class="hero-cta">
+        <a class="btn" href="https://www.jobsmyth.com/" target="_blank" rel="noopener" data-track="Jobsmyth site">Visit jobsmyth.com</a>
+      </div>
+    </div>
+    <figure class="cs-shot">
+      <div class="frame">
+        <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>jobsmyth.com</span></div>
+        <img src="media/product/jobsmyth-home.jpg" width="1440" height="900" alt="The Jobsmyth homepage: Tailored applications for jobs that are actually open.">
+      </div>
+      <figcaption>The Jobsmyth homepage during the private pilot.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="cs-section">
+        <header><span class="spec">01</span><h2>The problem</h2></header>
+        <div class="prose">
+          <p class="lead">Job seekers lose hours to listings that are already closed, roles they can't legally take, and AI writing tools that make things up.</p>
+          <p>Aggregator listings often stay up long after an employer has filled a role. For international students and anyone whose work authorization matters, many of the openings they see are not open to them at all. And most AI resume tools optimize for sounding impressive, which is how invented numbers and skills end up in front of hiring managers.</p>
+          <p>Jobsmyth started from a simple question: what would a job search assistant look like if every suggestion could be trusted?</p>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <header><span class="spec">02</span><h2>Product principles</h2></header>
+        <div class="prose">
+          <p>Three rules guide every feature. They are also the promise on the Jobsmyth homepage.</p>
+          <div class="principles">
+            <div><h3>Only open roles</h3><p>Every match is confirmed open on the employer's own careers page or hiring system.</p></div>
+            <div><h3>Only jobs you can take</h3><p>Matches respect where the user lives, their work authorization, visa needs, and remote eligibility.</p></div>
+            <div><h3>Nothing made up</h3><p>Documents use only facts from the user's own resume and notes. The user reviews everything and applies themselves.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <header><span class="spec">03</span><h2>What I built</h2></header>
+        <div class="prose">
+          <p class="lead">Three AI agents, each with one job.</p>
+          <ol class="steps">
+            <li><div><b>Job finder.</b> Searches employer career sites daily for confirmed-open roles, then filters every job by work authorization, visa sponsorship, and remote eligibility before it reaches the user.</div></li>
+            <li><div><b>Fit scorer.</b> Scores fit from any posting link, so users can check a role they found themselves, not only the ones Jobsmyth suggests.</div></li>
+            <li><div><b>Company researcher.</b> Researches employers and cites its sources, so users can verify what they read before an interview.</div></li>
+          </ol>
+          <p>Around the agents, Jobsmyth grew into a full application workflow: tailored resumes and cover letters, application tracking, outreach, and interview prep.</p>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <header><span class="spec">04</span><h2>Building trust into the product</h2></header>
+        <div class="prose">
+          <p>For a job seeker, one invented number on a resume can cost an offer. I treated truthfulness as a product requirement, not a prompt instruction, and designed three safeguards:</p>
+          <ul>
+            <li><b>Real facts only.</b> Generated documents draw only on the user's own resume and notes.</li>
+            <li><b>Unsupported numbers are flagged.</b> If a figure isn't in the source material, the user sees it called out instead of quietly included.</li>
+            <li><b>Hidden instructions are ignored.</b> Job postings can contain hidden text aimed at AI tools. Jobsmyth ignores instructions embedded in postings, a defense against prompt injection.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <header><span class="spec">05</span><h2>Feedback and continuous improvement</h2></header>
+        <div class="prose">
+          <p class="lead">I launched as a small private pilot with 8 NC A&amp;T job seekers, so I could learn from real searches before opening it to more people.</p>
+          <p>Users can report a posting that turns out to be expired. Those reports feed a self-improving search loop: a source that collects 3 expired-posting reports within 60 days is dropped automatically. The product gets more accurate the more people use it, without manual cleanup.</p>
+          <blockquote class="pullquote">10+ releases in 4 weeks, as sole product owner.</blockquote>
+          <p>Short release cycles let me move Jobsmyth from job matching into the rest of the application workflow, one tested step at a time.</p>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <header><span class="spec">06</span><h2>Results so far</h2></header>
+        <div class="prose">
+          <div class="results">
+            <div><b>10+</b><span>releases shipped in 4 weeks</span></div>
+            <div><b>3</b><span>AI agents in production</span></div>
+            <div><b>8</b><span>pilot users at NC A&amp;T</span></div>
+            <div><b>3 in 60</b><span>expired reports that drop a source</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="more" class="tint">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="spec">More case studies</p>
+        <h2>Other products I built.</h2>
+      </div>
+      <div class="cross">
+        <a href="aggielabpass" data-track="Case study link: AggieLabPass">
+          <span class="spec">Lab operations · NC A&amp;T</span>
+          <h3>AggieLabPass</h3>
+          <p>A production app that brings 5S and Lean to an engineering lab.</p>
+          <span class="go">Read the case study</span>
+        </a>
+        <a href="outreach-desk" data-track="Case study link: Aeon Outreach Desk">
+          <span class="spec">Growth automation · Aeonian Technology</span>
+          <h3>Aeon Outreach Desk</h3>
+          <p>An AI agent that turned manual prospecting into a daily pipeline.</p>
+          <span class="go">Read the case study</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="spec">Contact</p>
+      <h2 style="margin-top:14px">Let's build products people trust.</h2>
+      <p>Reach out about a product role or a product that needs a clear owner.</p>
+      <dl class="contact-rows">
+        <div><dt>Email</dt><dd><a href="mailto:richardabiona007@gmail.com" id="email" data-track="Email link">richardabiona007@gmail.com</a><button class="copy-btn" id="copy-email" type="button" data-track="Copy email">COPY</button></dd></div>
+        <div><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/richard-abiona-0084b285/" target="_blank" rel="noopener" data-track="LinkedIn">linkedin.com/in/richard-abiona</a></dd></div>
+        <div><dt>Based in</dt><dd>Raleigh, North Carolina</dd></div>
+      </dl>
+      <p class="foot"><span>© 2026 Richard Abiona</span><a href="/">Home</a><a href="product">Product</a><a href="quality">Quality</a><a href="impact">Impact</a></p>
+    </div>
+  </section>
+</main>
+
+<script src="assets/site.js"></script>
+</body>
+</html>
